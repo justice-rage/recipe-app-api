@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # Developer Created Apps
     'core',
     'user',
+    'recipe',
 ]
 
 REST_FRAMEWORK = {
