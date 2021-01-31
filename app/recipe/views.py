@@ -43,6 +43,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
+        # ^Possible source of "Relation 'core_recipe' does not exist" error
         """Retrieve the recipes for the authenticated user"""
         return self.queryset.filter(user=self.request.user)
 
@@ -52,3 +53,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
             return serializers.RecipeDetailSerializer
 
         return self.serializer_class
+
+    def perform_create(self, serializer):
+        """Create a new recipe"""
+        serializer.save(user=self.request.user)
